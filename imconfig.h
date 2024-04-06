@@ -24,11 +24,19 @@
 // DLL users: heaps and globals are not shared across DLL boundaries! You will need to call SetCurrentContext() + SetAllocatorFunctions()
 // for each static/DLL boundary you are calling from. Read "Context and Memory Allocators" section of imgui.cpp for more details.
 
+#ifdef IMGUI_SHARED
+
 #ifdef IMGUI_EXPORT
 #define IMGUI_API __declspec( dllexport )
 #else
 #define IMGUI_API __declspec( dllimport )
 #endif
+
+#else
+
+#define IMGUI_API
+
+#endif // IMGUI_SHARED
 
 //---- Don't define obsolete functions/enums/behaviors. Consider enabling from time to time after updating to clean your code of obsolete function/names.
 //#define IMGUI_DISABLE_OBSOLETE_FUNCTIONS
